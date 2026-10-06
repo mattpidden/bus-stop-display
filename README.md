@@ -15,6 +15,7 @@
 
 - [What it shows](#what-it-shows)
 - [Parts list](#parts-list)
+- [Build journey](#build-journey)
 - [Repository layout](#repository-layout)
 - [3D printing the case](#3d-printing-the-case)
 - [Wiring](#wiring)
@@ -58,7 +59,16 @@ Arrivals refresh every 20 seconds.
 | 1 | **USB-C cable + 5 V USB power supply** | Any phone charger is fine. |
 | — | **3D-printed case** | The front, back and stand files are in [`cad/`](cad/). |
 
-Optional: printed stickers for the red stop-name banner and the "Towards …" text on the front, like in the photo.
+The red stop-name banner and the "Towards …" text on the front are printed in colour as part of the front shell. You'll also need a few small screws to hold the LCD and the ESP32 in place.
+
+---
+
+## Build journey
+
+| 1. Idea | 2. First print | 3. Internals | 4. Final |
+|:---:|:---:|:---:|:---:|
+| <img src="images/build-1-idea.jpeg" width="200" alt="A bare blue 20x4 LCD showing live bus times"> | <img src="images/build-2-first-print.jpeg" width="200" alt="First front-case print with the orange LCD fitted"> | <img src="images/build-3-internals.jpeg" width="200" alt="Inside the case: LCD screwed into the front, ESP32 in the back"> | <img src="images/build-4-final.jpeg" width="200" alt="Finished bus stop screen on a desk"> |
+| A quick test with parts I already had: a blue 20×4 LCD showing live TfL arrivals. | My first attempt at the front case, with the orange LCD and the colour-printed stop sign. | The LCD and its I²C backpack are screwed into the front shell, and the ESP32 sits in the back shell. | The finished screen, powered by USB-C, with the menu button on top. |
 
 ---
 
@@ -75,7 +85,8 @@ Optional: printed stickers for the red stop-name banner and the "Towards …" te
 │       ├── BusStopScreen.ino  Arduino sketch
 │       └── secrets.example.h  Wi-Fi credentials template
 ├── images/
-│   └── poster.png
+│   ├── poster.png
+│   └── build-*.jpeg           Build photos
 ├── LICENSE
 └── README.md
 ```
@@ -97,6 +108,7 @@ When assembled, the case is about 104 × 77 × 40 mm, so it fits on any printer 
 **Suggested settings** (nothing in these parts is critical):
 
 - **Material:** PLA or PETG. Matte black looks the most like a real bus-stop sign.
+- **Colours:** The front shell has the stop sign built in: a red banner with white text, and white "Towards …" text below the display. Use a multi-material printer (e.g. AMS/MMU) or a manual filament change at the right layer. To show your own stop, import `front.step` into a CAD tool, remove the existing lettering and add your own. STEP files keep the shape but not editable text.
 - **Layer height:** 0.2 mm
 - **Walls:** 3 perimeters
 - **Infill:** 15–20 %
@@ -190,13 +202,12 @@ When it boots, the display shows "Connecting WiFi…" and then the arrivals. To 
 ## Assembly
 
 1. **Flash and test first.** Wire everything up on the bench and check that arrivals appear before you put anything in the case.
-2. **Fit the LCD** into the front shell, display facing out through the window. The I²C backpack faces the inside of the case.
-3. **Mount the button** where it can be reached from outside the case, then connect its two wires to GPIO 33 and GND.
-4. **Seat the ESP32** in the back shell, with its USB-C port lined up with the cut-out in the case.
+2. **Fit the LCD** into the front shell, display facing out through the window, and screw it in through its corner mounting holes. The I²C backpack faces the inside of the case.
+3. **Screw the ESP32** into the back shell, with its USB-C port lined up with the cut-out in the case.
+4. **Mount the button** in the top of the case, then connect its two wires to GPIO 33 and GND.
 5. **Route the jumper wires** so nothing is pinched, then press the front and back shells together.
 6. **Attach the stand** to the back so the display leans back at a comfortable viewing angle.
-7. **Optional:** add a red stop-name banner and a "Towards …" label to the front for the full bus-stop look.
-8. Plug in the USB-C cable.
+7. Plug in the USB-C cable.
 
 ---
 
