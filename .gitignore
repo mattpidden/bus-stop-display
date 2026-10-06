@@ -1,0 +1,7 @@
+# Your Wi-Fi credentials - never commit this
+firmware/BusStopScreen/secrets.h
+
+# Build output / editor clutter
+build/
+.vscode/
+.DS_Store
